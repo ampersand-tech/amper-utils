@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "rootDir": ".",
+    "baseUrl": ".",
+    "sourceMap": true,
+    "alwaysStrict": true,
+    "strictNullChecks": true,
+    "noImplicitAny": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "module": "commonjs",
+    "target": "es2017",
+    "jsx": "react",
+    "allowJs": true,
+    "outDir": "./dist",
+    "mapRoot": "./dist",
+    "paths": {
+      "*": ["*"]
+    },
+    "include": [
+      "./*"
+    ]
+  },
+  "exclude": [
+    "./node_modules",
+    "./dist/**/*"
+  ]
+}

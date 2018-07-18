@@ -1,0 +1,25 @@
+{
+  "name": "amper-utils",
+  "version": "1.0.0",
+  "description": "Useful utils for Ampersand",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ampersandtech/utils.git"
+  },
+  "keywords": [
+    "utils"
+  ],
+  "author": "Ampersand Technologies, Inc.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ampersandtech/utils/issues"
+  },
+  "homepage": "https://github.com/ampersandtech/utils#readme",
+  "devDependencies": {
+    "@types/node": "^10.5.2"
+  }
+}
