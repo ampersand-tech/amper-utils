@@ -2,9 +2,11 @@
   "name": "amper-utils",
   "version": "1.0.0",
   "description": "Useful utils for Ampersand",
-  "main": "index.js",
+  "main": "dist/types.js",
+  "types": "dist/types.d.ts",
   "scripts": {
-    "build": "./node_modules/.bin/tsc; ./node_modules/.bin/tsc -p tsconfig.es2017.json"
+    "build": "./node_modules/.bin/tsc; ./node_modules/.bin/tsc -p tsconfig.es2017.json",
+    "test": "mocha -r ts-node/register test/**/*-test.ts"
   },
   "repository": {
     "type": "git",
@@ -20,7 +22,12 @@
   },
   "homepage": "https://github.com/ampersandtech/utils#readme",
   "devDependencies": {
+    "@types/chai": "^4.1.4",
+    "@types/mocha": "^5.2.5",
     "@types/node": "^10.5.2",
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0",
+    "ts-node": "^7.0.0",
     "typescript": "^2.9.2"
   }
 }
