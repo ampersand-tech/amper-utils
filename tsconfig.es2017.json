@@ -9,12 +9,12 @@
     "noUnusedParameters": true,
     "declaration": true,
     "module": "commonjs",
-    "target": "es5",
+    "target": "es2017",
     "lib": [
       "es2017"
     ],
     "jsx": "react",
-    "outDir": "./dist",
+    "outDir": "./dist2017",
     "paths": {
       "*": ["*"]
     }

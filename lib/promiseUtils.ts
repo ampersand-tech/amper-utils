@@ -2,6 +2,8 @@
 * Copyright 2017-present Ampersand Technologies, Inc.
 */
 
+import { ErrDataCB, Stash } from './types';
+
 let domain;
 
 try {

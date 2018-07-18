@@ -2,16 +2,7 @@
 * Copyright 2018-present Ampersand Technologies, Inc.
 */
 
-export interface ErrorObject {
-  name?: string;
-  message?: string;
-  stack?: string;
-  code?: string;
-  statusCode?: number;
-}
-
-export type ErrorType = undefined|null|string|ErrorObject;
-
+import { ErrorObject, ErrorType } from './types';
 
 export function errorToString(err: string|ErrorObject|undefined|null, allowStack: boolean): string {
   if (typeof err === 'string') {
@@ -50,6 +41,5 @@ export function errorToCode(err: ErrorType): string {
 }
 
 export function isNotFound(err: ErrorType) {
-  return err && errorToString(err, false) === 'not found';
+  return err ? (errorToString(err, false) === 'not found') : false;
 }
-

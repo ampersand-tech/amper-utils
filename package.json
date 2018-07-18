@@ -4,7 +4,7 @@
   "description": "Useful utils for Ampersand",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "build": "./node_modules/.bin/tsc; ./node_modules/.bin/tsc -p tsconfig.es2017.json"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/ampersandtech/utils#readme",
   "devDependencies": {
-    "@types/node": "^10.5.2"
+    "@types/node": "^10.5.2",
+    "typescript": "^2.9.2"
   }
 }
