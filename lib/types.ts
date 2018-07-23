@@ -18,3 +18,5 @@ export type ErrorType = undefined|null|string|ErrorObject;
 export type NoErrDataCB<T> = (err: null|undefined, data: T) => void;
 export type ErrDataCB<T> = (err?: ErrorType, data?: T) => void;
 export type ErrWithDataCB<T> = (err: ErrorType, data: T) => void;
+
+export declare function absurd(a: never): never;
