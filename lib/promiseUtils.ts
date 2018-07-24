@@ -2,6 +2,7 @@
 * Copyright 2017-present Ampersand Technologies, Inc.
 */
 
+import * as ErrorUtils from './errorUtils';
 import { ErrDataCB, Stash } from './types';
 
 let domain;
@@ -417,4 +418,19 @@ export class ActionTimeout {
   clearTimeout() {
     this.noTimeoutFail = true;
   }
+}
+
+export function ignoreError<T>(p: Promise<T>, ...args: string[]): Promise<T|undefined> {
+  return new Promise(function(resolve, reject) {
+    p.then(resolve).catch(function(err) {
+      const errStr = ErrorUtils.errorToString(err, false);
+      for (const arg of args) {
+        if (arg === errStr) {
+          resolve(undefined);
+          return;
+        }
+      }
+      reject(err);
+    });
+  });
 }

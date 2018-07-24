@@ -87,4 +87,5 @@ export declare class ActionTimeout {
     run<T>(action: () => Promise<T>): Promise<T>;
     clearTimeout(): void;
 }
+export declare function ignoreError<T>(p: Promise<T>, ...args: string[]): Promise<T | undefined>;
 export {};

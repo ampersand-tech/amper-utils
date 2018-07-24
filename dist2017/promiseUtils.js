@@ -3,6 +3,7 @@
 * Copyright 2017-present Ampersand Technologies, Inc.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
+const ErrorUtils = require("./errorUtils");
 let domain;
 try {
     domain = require('domain');
@@ -220,3 +221,18 @@ class ActionTimeout {
     }
 }
 exports.ActionTimeout = ActionTimeout;
+function ignoreError(p, ...args) {
+    return new Promise(function (resolve, reject) {
+        p.then(resolve).catch(function (err) {
+            const errStr = ErrorUtils.errorToString(err, false);
+            for (const arg of args) {
+                if (arg === errStr) {
+                    resolve(undefined);
+                    return;
+                }
+            }
+            reject(err);
+        });
+    });
+}
+exports.ignoreError = ignoreError;

@@ -38,6 +38,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var ErrorUtils = require("./errorUtils");
 var domain;
 try {
     domain = require('domain');
@@ -346,3 +347,23 @@ var ActionTimeout = /** @class */ (function () {
     return ActionTimeout;
 }());
 exports.ActionTimeout = ActionTimeout;
+function ignoreError(p) {
+    var args = [];
+    for (var _i = 1; _i < arguments.length; _i++) {
+        args[_i - 1] = arguments[_i];
+    }
+    return new Promise(function (resolve, reject) {
+        p.then(resolve).catch(function (err) {
+            var errStr = ErrorUtils.errorToString(err, false);
+            for (var _i = 0, args_1 = args; _i < args_1.length; _i++) {
+                var arg = args_1[_i];
+                if (arg === errStr) {
+                    resolve(undefined);
+                    return;
+                }
+            }
+            reject(err);
+        });
+    });
+}
+exports.ignoreError = ignoreError;
