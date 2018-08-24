@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ampersandtech/utils.git"
+    "url": "git+https://github.com/ampersand-tech/utils.git"
   },
   "keywords": [
     "utils"
@@ -18,9 +18,9 @@
   "author": "Ampersand Technologies, Inc.",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ampersandtech/utils/issues"
+    "url": "https://github.com/ampersand-tech/utils/issues"
   },
-  "homepage": "https://github.com/ampersandtech/utils#readme",
+  "homepage": "https://github.com/ampersand-tech/utils#readme",
   "devDependencies": {
     "@types/chai": "^4.1.4",
     "@types/mocha": "^5.2.5",
