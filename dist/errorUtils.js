@@ -16,7 +16,7 @@ function errorToString(err, allowStack) {
     if (err.message) {
         return err.message;
     }
-    var errStr = '' + err;
+    const errStr = '' + err;
     if (errStr && errStr !== '[object Object]') {
         return errStr;
     }

@@ -3,11 +3,11 @@
 * Copyright 2017-present Ampersand Technologies, Inc.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
-var fs = require("fs");
-var stream = require("stream");
-var zlib = require("zlib");
+const fs = require("fs");
+const stream = require("stream");
+const zlib = require("zlib");
 function streamFromFile(filename) {
-    var readStream = fs.createReadStream(filename);
+    let readStream = fs.createReadStream(filename);
     if (filename.slice(-3) === '.gz') {
         readStream = readStream.pipe(zlib.createGunzip());
     }
@@ -15,15 +15,15 @@ function streamFromFile(filename) {
 }
 exports.streamFromFile = streamFromFile;
 function streamFromData(data) {
-    var outStream = new stream.PassThrough();
+    const outStream = new stream.PassThrough();
     outStream.push(data);
     outStream.push(null);
     return outStream;
 }
 exports.streamFromData = streamFromData;
 function streamFromS3(s3, bucketName, filePath, uncompress) {
-    var params = { Bucket: bucketName, Key: filePath };
-    var readStream = s3.getObject(params).createReadStream();
+    const params = { Bucket: bucketName, Key: filePath };
+    let readStream = s3.getObject(params).createReadStream();
     if (uncompress) {
         readStream = readStream.pipe(zlib.createGunzip());
     }
@@ -31,17 +31,17 @@ function streamFromS3(s3, bucketName, filePath, uncompress) {
 }
 exports.streamFromS3 = streamFromS3;
 function streamToFile(readStream, filePath, compress) {
-    return new Promise(function (resolve, reject) {
+    return new Promise((resolve, reject) => {
         if (compress) {
             readStream = readStream.pipe(zlib.createGzip());
             filePath += '.gz';
         }
-        var writeStream = fs.createWriteStream(filePath);
-        var writePipe = readStream.pipe(writeStream);
-        writePipe.on('finish', function () {
+        const writeStream = fs.createWriteStream(filePath);
+        const writePipe = readStream.pipe(writeStream);
+        writePipe.on('finish', () => {
             resolve();
         });
-        writePipe.on('error', function (err) {
+        writePipe.on('error', (err) => {
             reject(err);
         });
     });
@@ -51,7 +51,7 @@ function streamToS3(s3, readStream, bucketName, filePath, contentType, compress)
     if (compress) {
         readStream = readStream.pipe(zlib.createGzip());
     }
-    var params = {
+    const params = {
         Bucket: bucketName,
         Key: filePath,
         Body: readStream,

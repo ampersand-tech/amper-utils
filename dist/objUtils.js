@@ -9,10 +9,10 @@ function isObject(value) {
 }
 exports.isObject = isObject;
 function fieldCount(obj) {
-    var count = 1; // count ourselves
+    let count = 1; // count ourselves
     if (typeof obj === 'object' && obj !== null) {
         // Count our children
-        for (var key in obj) {
+        for (let key in obj) {
             count += fieldCount(obj[key]);
         }
     }
@@ -20,17 +20,16 @@ function fieldCount(obj) {
 }
 exports.fieldCount = fieldCount;
 function shallowClone(src) {
-    var dst = {};
-    for (var key in src) {
+    const dst = {};
+    for (let key in src) {
         dst[key] = src[key];
     }
     return dst;
 }
 exports.shallowClone = shallowClone;
 function shallowCloneExcludeFields(src, toExclude) {
-    var dst = shallowClone(src);
-    for (var _i = 0, toExclude_1 = toExclude; _i < toExclude_1.length; _i++) {
-        var field = toExclude_1[_i];
+    const dst = shallowClone(src);
+    for (const field of toExclude) {
         delete dst[field];
     }
     return dst;
@@ -42,14 +41,14 @@ exports.shallowCloneExcludeFields = shallowCloneExcludeFields;
  * @param replace The object to merge into src
  */
 function shallowCloneAndCopy(src, replace) {
-    var dst = shallowClone(src);
+    let dst = shallowClone(src);
     copyFields(replace, dst);
     return dst;
 }
 exports.shallowCloneAndCopy = shallowCloneAndCopy;
 function cloneTruncate(srcObj, maxBytes) {
-    var noted = false;
-    var endNote = '...';
+    let noted = false;
+    let endNote = '...';
     return cloneRecurTruncate(srcObj);
     function cloneRecurTruncate(obj) {
         if (maxBytes < 0) {
@@ -73,10 +72,10 @@ function cloneTruncate(srcObj, maxBytes) {
         if (obj instanceof Date) {
             return new Date(obj.getTime());
         }
-        var copy;
+        let copy;
         if (obj instanceof Array) {
             copy = [];
-            for (var i = 0; i < obj.length; i++) {
+            for (let i = 0; i < obj.length; i++) {
                 copy[i] = cloneRecurTruncate(obj[i]);
                 if (maxBytes < 0) {
                     if (!noted) {
@@ -89,7 +88,7 @@ function cloneTruncate(srcObj, maxBytes) {
             return copy;
         }
         copy = {};
-        for (var id in obj) {
+        for (let id in obj) {
             if (Object.prototype.hasOwnProperty.call(obj, id)) {
                 copy[id] = cloneRecurTruncate(obj[id]);
                 if (maxBytes < 0) {
@@ -121,16 +120,16 @@ function cloneRecur(obj, depth) {
         // quoting MDN: "A Blob object represents a file-like object of immutable, raw data."
         return obj;
     }
-    var copy;
+    let copy;
     if (obj instanceof Array) {
         copy = [];
-        for (var i = 0; i < obj.length; i++) {
+        for (let i = 0; i < obj.length; i++) {
             copy[i] = cloneRecur(obj[i], depth);
         }
         return copy;
     }
     copy = {};
-    for (var id in obj) {
+    for (let id in obj) {
         if (Object.prototype.hasOwnProperty.call(obj, id)) { // removing this check would give 50% speed improvement
             copy[id] = cloneRecur(obj[id], depth);
         }
@@ -143,7 +142,7 @@ function clone(srcObj) {
     if ('object' !== typeof srcObj || null === srcObj) {
         return srcObj;
     }
-    var ret;
+    let ret;
     try {
         ret = cloneRecur(srcObj, 0);
     }
@@ -153,7 +152,7 @@ function clone(srcObj) {
             return cloneWithCycle(srcObj);
         }
         else {
-            console.error('Util.clone error', { e: e, srcObj: srcObj });
+            console.error('Util.clone error', { e, srcObj });
         }
     }
     return ret;
@@ -164,14 +163,14 @@ function cloneExcludingFields(srcObj, excludeFields) {
     if (srcObj === null || srcObj === undefined || typeof (srcObj) !== 'object') {
         return srcObj;
     }
-    var res = Array.isArray(srcObj) ? [] : {};
-    for (var k in srcObj) {
+    let res = Array.isArray(srcObj) ? [] : {};
+    for (let k in srcObj) {
         if (excludeFields) {
             if (excludeFields === '*' || (excludeFields !== 1 && excludeFields[k] && !isObject(excludeFields[k]))) {
                 continue;
             }
         }
-        var exclude = void 0;
+        let exclude;
         if (excludeFields && typeof (excludeFields) === 'object') {
             exclude = excludeFields[k];
         }
@@ -183,12 +182,12 @@ exports.cloneExcludingFields = cloneExcludingFields;
 function cloneWithCycle(rootObj, pruneCycles) {
     return cloneRec(rootObj, [], []);
     function cloneRec(obj, seenObjs, seenValues) {
-        var copy;
+        let copy;
         // Handle the 3 simple types, and null or undefined
         if (null === obj || 'object' !== typeof obj) {
             return obj;
         }
-        var existingIdx = seenObjs.indexOf(obj);
+        let existingIdx = seenObjs.indexOf(obj);
         if (existingIdx >= 0) {
             if (pruneCycles) {
                 return '<link cycle>';
@@ -208,7 +207,7 @@ function cloneWithCycle(rootObj, pruneCycles) {
             copy = [];
             seenObjs.push(obj);
             seenValues.push(copy);
-            for (var i = 0, len = obj.length; i < len; i++) {
+            for (let i = 0, len = obj.length; i < len; i++) {
                 copy[i] = cloneRec(obj[i], seenObjs, seenValues);
             }
             return copy;
@@ -217,7 +216,7 @@ function cloneWithCycle(rootObj, pruneCycles) {
         copy = {};
         seenObjs.push(obj);
         seenValues.push(copy);
-        for (var attr in obj) {
+        for (let attr in obj) {
             if (Object.prototype.hasOwnProperty.call(obj, attr)) {
                 try {
                     copy[attr] = cloneRec(obj[attr], seenObjs, seenValues);
@@ -232,7 +231,7 @@ function cloneWithCycle(rootObj, pruneCycles) {
 }
 exports.cloneWithCycle = cloneWithCycle;
 function cloneImmutable(obj) {
-    var copy = clone(obj);
+    let copy = clone(obj);
     return objectMakeImmutable(copy);
 }
 exports.cloneImmutable = cloneImmutable;
@@ -241,8 +240,8 @@ function objectMakeImmutable(obj, excludeFields) {
         return obj;
     }
     Object.freeze(obj);
-    for (var k in obj) {
-        var exclude = excludeFields && excludeFields[k];
+    for (let k in obj) {
+        let exclude = excludeFields && excludeFields[k];
         if (exclude && !isObject(exclude)) {
             continue;
         }
@@ -263,8 +262,8 @@ function isImmutable(obj) {
     if (!Object.isFrozen(obj)) {
         return false;
     }
-    for (var k in obj) {
-        var o = obj[k];
+    for (let k in obj) {
+        let o = obj[k];
         if (!isImmutable(o)) {
             return false;
         }
@@ -279,12 +278,12 @@ function deepCompare(x, y) {
     if (!(x instanceof Object) || !(y instanceof Object)) {
         return false;
     }
-    for (var p in x) {
+    for (let p in x) {
         if (!deepCompare(x[p], y[p])) {
             return false;
         }
     }
-    for (var p in y) {
+    for (let p in y) {
         if (!(x.hasOwnProperty(p))) {
             return false;
         }
@@ -294,8 +293,8 @@ function deepCompare(x, y) {
 exports.deepCompare = deepCompare;
 // NOTE: return type has Partial to encourage users of this to type their masks.
 function cloneSomeFieldsImmutable(obj, mask, defaults) {
-    var copy;
-    var i;
+    let copy;
+    let i;
     if (defaults !== undefined && (obj === null || obj === undefined)) {
         obj = defaults;
     }
@@ -309,7 +308,7 @@ function cloneSomeFieldsImmutable(obj, mask, defaults) {
     if (mask === 1) {
         return {};
     }
-    var submask = mask._ids; // not great type safety here
+    let submask = mask._ids; // not great type safety here
     if (submask) {
         if (obj instanceof Array) {
             copy = [];
@@ -324,7 +323,7 @@ function cloneSomeFieldsImmutable(obj, mask, defaults) {
         }
         else if (obj instanceof Object) {
             copy = {};
-            for (var id in obj) {
+            for (let id in obj) {
                 if (submask instanceof Object) {
                     copy[id] = cloneSomeFieldsImmutable(obj[id], submask, defaults && defaults._ids);
                 }
@@ -336,9 +335,9 @@ function cloneSomeFieldsImmutable(obj, mask, defaults) {
     }
     else if (typeof (mask) === 'object') {
         copy = {};
-        for (var key in mask) {
-            var maskVal = mask[key];
-            var objVal = void 0;
+        for (let key in mask) {
+            let maskVal = mask[key];
+            let objVal;
             if (!obj.hasOwnProperty(key) && (!defaults || !defaults.hasOwnProperty(key))) {
                 // key is in the mask but not in the object or the defaults, so leave it out of the copy object
                 continue;
@@ -356,7 +355,7 @@ function cloneSomeFieldsImmutable(obj, mask, defaults) {
                 else if (objVal instanceof Array) {
                     copy[key] = [];
                     for (i = 0; i < objVal.length; i++) {
-                        var dk = (defaults && defaults[key]);
+                        let dk = (defaults && defaults[key]);
                         copy[key].push(cloneSomeFieldsImmutable(objVal[i], maskVal, dk && dk[i]));
                     }
                 }
@@ -416,14 +415,14 @@ exports.cloneSomeFieldsImmutable = cloneSomeFieldsImmutable;
  * Copy properties from src into dst
  */
 function copyFields(src, dst) {
-    for (var key in src) {
+    for (let key in src) {
         dst[key] = src[key];
     }
     return dst;
 }
 exports.copyFields = copyFields;
 function copyFieldsErrIfSet(src, dst) {
-    var dupes = objIntersectionKeys(src, dst);
+    let dupes = objIntersectionKeys(src, dst);
     if (dupes.length) {
         console.error('copyFieldsErrIfSet.existing keys', dupes);
         return;
@@ -433,7 +432,7 @@ function copyFieldsErrIfSet(src, dst) {
 }
 exports.copyFieldsErrIfSet = copyFieldsErrIfSet;
 function copyFieldsIfUnset(src, dst) {
-    for (var key in src) {
+    for (let key in src) {
         if (!dst.hasOwnProperty(key)) {
             dst[key] = src[key];
         }
@@ -446,8 +445,7 @@ exports.copyFieldsIfUnset = copyFieldsIfUnset;
  */
 function copySomeFields(src, dst, fields) {
     dst = dst || {};
-    for (var _i = 0, fields_1 = fields; _i < fields_1.length; _i++) {
-        var key = fields_1[_i];
+    for (const key of fields) {
         if (src[key] !== undefined) {
             dst[key] = src[key];
         }
@@ -456,8 +454,8 @@ function copySomeFields(src, dst, fields) {
 }
 exports.copySomeFields = copySomeFields;
 function cloneAndStrip(obj, fields) {
-    var objCopy = clone(obj);
-    for (var i = 0; i < fields.length; i++) {
+    let objCopy = clone(obj);
+    for (let i = 0; i < fields.length; i++) {
         delete objCopy[fields[i]];
     }
     return objCopy;
@@ -465,7 +463,7 @@ function cloneAndStrip(obj, fields) {
 exports.cloneAndStrip = cloneAndStrip;
 // remove empty subobjects
 function objectTrim(obj) {
-    for (var k in obj) {
+    for (let k in obj) {
         if (!isObject(obj[k])) {
             continue;
         }
@@ -479,7 +477,7 @@ function objectTrim(obj) {
 exports.objectTrim = objectTrim;
 // Add all numbers in src to dst, creating the key if necessary
 function objectSum(dst, src) {
-    for (var key in src) {
+    for (let key in src) {
         if (dst.hasOwnProperty(key)) {
             if (typeof dst[key] === 'object') {
                 objectSum(dst[key], src[key]);
@@ -495,8 +493,8 @@ function objectSum(dst, src) {
 }
 exports.objectSum = objectSum;
 function objIntersectionKeys(lhs, rhs) {
-    var k;
-    var res = [];
+    let k;
+    let res = [];
     for (k in lhs) {
         if (k in rhs) {
             res.push(k);
@@ -506,8 +504,8 @@ function objIntersectionKeys(lhs, rhs) {
 }
 exports.objIntersectionKeys = objIntersectionKeys;
 function objFindRHSOnlyKeys(lhs, rhs) {
-    var lhsMissing = [];
-    for (var k in rhs) {
+    let lhsMissing = [];
+    for (let k in rhs) {
         if (k in lhs) {
             continue;
         }
@@ -522,8 +520,8 @@ function objDiffKeys(lhs, rhs) {
 exports.objDiffKeys = objDiffKeys;
 // Return the values in an object as an array
 function objectValues(obj) {
-    var a = [];
-    for (var idx in obj) {
+    let a = [];
+    for (let idx in obj) {
         if (!obj.hasOwnProperty(idx)) {
             continue;
         }
@@ -533,8 +531,8 @@ function objectValues(obj) {
 }
 exports.objectValues = objectValues;
 function objectMap(obj, cb) {
-    var res = {};
-    for (var key in obj) {
+    let res = {};
+    for (let key in obj) {
         if (!obj.hasOwnProperty(key)) {
             continue;
         }
@@ -547,9 +545,9 @@ function objectFilter(obj, filter) {
     if (!obj) {
         return;
     }
-    var res = {};
-    for (var k in obj) {
-        var v = obj[k];
+    const res = {};
+    for (const k in obj) {
+        const v = obj[k];
         if (!filter && (v === null || v === undefined)) {
             continue;
         }
@@ -565,12 +563,12 @@ exports.objectFilter = objectFilter;
  * only checks keys directly on the object.
  */
 function objectKeysEqual(obj1, obj2) {
-    var keys1 = Object.keys(obj1);
+    let keys1 = Object.keys(obj1);
     if (keys1.length !== Object.keys(obj2).length) {
         return false;
     }
-    for (var i = 0; i < keys1.length; ++i) {
-        var k = keys1[i];
+    for (let i = 0; i < keys1.length; ++i) {
+        let k = keys1[i];
         if (!obj2.hasOwnProperty(k)) {
             return false;
         }
@@ -582,22 +580,22 @@ function objectSortKeys(obj, cmp) {
     if (!obj) {
         return obj;
     }
-    var keys = Object.keys(obj);
+    let keys = Object.keys(obj);
     if (keys.length <= 1) {
         return obj;
     }
     keys = keys.sort(cmp);
-    var out = {};
-    for (var i = 0; i < keys.length; ++i) {
+    let out = {};
+    for (let i = 0; i < keys.length; ++i) {
         out[keys[i]] = obj[keys[i]];
     }
     return out;
 }
 exports.objectSortKeys = objectSortKeys;
 function objSwapValues(a, b, keys) {
-    for (var i = 0; i < keys.length; ++i) {
-        var k = keys[i];
-        var tmp = a[k];
+    for (let i = 0; i < keys.length; ++i) {
+        let k = keys[i];
+        let tmp = a[k];
         a[k] = b[k];
         b[k] = tmp;
     }
@@ -607,7 +605,7 @@ function safeObjIsEmpty(obj) {
     if (!obj) {
         return true;
     }
-    for (var _x in obj) {
+    for (const _x in obj) {
         return false;
     }
     return true;
@@ -618,8 +616,8 @@ function objectGetFromPath(obj, names) {
     if (!obj || !Array.isArray(names)) {
         return;
     }
-    for (var i = 0; i < names.length; i++) {
-        var name = names[i];
+    for (let i = 0; i < names.length; i++) {
+        let name = names[i];
         if (!obj || typeof obj !== 'object') {
             return;
         }
@@ -633,8 +631,8 @@ function objectFillPath(obj, path, value) {
         console.error('objectFillPath invalid call', { obj: obj, path: path });
         return;
     }
-    for (var i = 0; i < path.length - 1; ++i) {
-        var name = path[i];
+    for (let i = 0; i < path.length - 1; ++i) {
+        let name = path[i];
         if (obj[name] && typeof obj[name] !== 'object') {
             return;
         }
@@ -668,7 +666,7 @@ function objClear(obj) {
         obj.splice(0, obj.length);
         return obj;
     }
-    for (var k in obj) {
+    for (let k in obj) {
         if (obj.hasOwnProperty(k)) {
             delete obj[k];
         }
@@ -684,14 +682,14 @@ function objDiffRecur(path, diffs, ignoreMask, src, dst) {
         diffs.push({ path: path, src: (src === undefined ? 'undefined' : src), dst: (dst === undefined ? 'undefined' : dst) });
     }
     else if (typeof src === 'object') {
-        var id = void 0, visited = {};
-        var maskVal = void 0;
+        let id, visited = {};
+        let maskVal;
         for (id in src) {
             maskVal = ignoreMask[id] || ignoreMask._ids || {};
             if (maskVal && typeof (maskVal) !== 'object') {
                 continue;
             }
-            var newPath = path + '.' + id;
+            let newPath = path + '.' + id;
             if (Array.isArray(src)) {
                 newPath = path + '[' + id + ']';
             }
@@ -724,10 +722,10 @@ function objCmpMasked(src, dst, ignoreMask) {
 }
 exports.objCmpMasked = objCmpMasked;
 function objToArray(obj, sortOpt) {
-    var res = [];
+    const res = [];
     if (obj) {
-        for (var k in obj) {
-            var o = obj[k];
+        for (let k in obj) {
+            let o = obj[k];
             res.push(o);
         }
         if (sortOpt) {
@@ -759,8 +757,8 @@ function objCmpFastInternal(src, dst, recurDepth) {
     if (typeof (src) !== 'object' || typeof (dst) !== 'object' || src === null || dst === null) {
         return src === dst;
     }
-    var sKeys = Object.keys(src);
-    var dKeys = Object.keys(dst);
+    let sKeys = Object.keys(src);
+    let dKeys = Object.keys(dst);
     if (sKeys.length !== dKeys.length) {
         return false; // Different number of keys
     }
@@ -768,9 +766,9 @@ function objCmpFastInternal(src, dst, recurDepth) {
         throw 'obj_too_deep';
     }
     recurDepth++;
-    for (var i = 0; i < sKeys.length; ++i) {
-        var s = src[sKeys[i]];
-        var d = dst[sKeys[i]];
+    for (let i = 0; i < sKeys.length; ++i) {
+        let s = src[sKeys[i]];
+        let d = dst[sKeys[i]];
         if (!objCmpFastInternal(s, d, recurDepth)) {
             return false;
         }

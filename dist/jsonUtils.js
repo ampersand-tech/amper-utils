@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /**
 * Copyright 2018-present Ampersand Technologies, Inc.
 */
-var objUtils_1 = require("./objUtils");
+const objUtils_1 = require("./objUtils");
 function safeParse(jsonStr) {
     if (!jsonStr) {
         return;
@@ -23,7 +23,7 @@ function safeStringify(val, maxBytes, pretty) {
     if (val === null) {
         return 'null';
     }
-    var str;
+    let str;
     try {
         // try vanilla stringify first, because it is fastest
         str = JSON.stringify(val, undefined, pretty ? 2 : undefined); // @allowJsonFuncs

@@ -3,7 +3,7 @@
 * Copyright 2017-present Ampersand Technologies, Inc.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
-var easingFunctions = {
+const easingFunctions = {
     linear: function (t) { return t; },
     easeInQuad: function (t) { return t * t; },
     easeOutQuad: function (t) { return t * (2 - t); },
@@ -48,7 +48,7 @@ function interp(a, b, p) {
 }
 exports.interp = interp;
 function parameterize(a, b, x) {
-    var delta = b - a;
+    const delta = b - a;
     if (!delta) {
         return (x < a) ? 0 : 1;
     }
@@ -87,8 +87,8 @@ function length(v) {
 }
 exports.length = length;
 function distSqrd(p1, p2) {
-    var dx = p2.x - p1.x;
-    var dy = p2.y - p1.y;
+    const dx = p2.x - p1.x;
+    const dy = p2.y - p1.y;
     return dx * dx + dy * dy;
 }
 exports.distSqrd = distSqrd;
@@ -97,7 +97,7 @@ function dist(p1, p2) {
 }
 exports.dist = dist;
 function normalize(v) {
-    var len = Math.sqrt(lengthSqrd(v));
+    const len = Math.sqrt(lengthSqrd(v));
     if (len) {
         v.x /= len;
         v.y /= len;
@@ -111,14 +111,9 @@ function clone(p) {
     };
 }
 exports.clone = clone;
-function vectorAdd() {
-    var vs = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        vs[_i] = arguments[_i];
-    }
-    var out = { x: 0, y: 0 };
-    for (var _a = 0, vs_1 = vs; _a < vs_1.length; _a++) {
-        var v = vs_1[_a];
+function vectorAdd(...vs) {
+    const out = { x: 0, y: 0 };
+    for (const v of vs) {
         out.x += v.x;
         out.y += v.y;
     }
@@ -139,8 +134,8 @@ function vectorMulScalar(v, s) {
     };
 }
 exports.vectorMulScalar = vectorMulScalar;
-var d2r = Math.PI / 180;
-var r2d = 180 / Math.PI;
+const d2r = Math.PI / 180;
+const r2d = 180 / Math.PI;
 function deg2Rad(deg) {
     return d2r * deg;
 }

@@ -8,7 +8,7 @@ function findIdxByKey(arr, key, id) {
     if (!arr) {
         return -1;
     }
-    for (var i = arr.length - 1; i >= 0; i--) {
+    for (let i = arr.length - 1; i >= 0; i--) {
         if (arr[i][key] === id) {
             return i;
         }
@@ -17,14 +17,14 @@ function findIdxByKey(arr, key, id) {
 }
 exports.findIdxByKey = findIdxByKey;
 function findByKey(arr, key, id) {
-    var idx = findIdxByKey(arr, key, id);
+    let idx = findIdxByKey(arr, key, id);
     if (idx >= 0) {
         return arr[idx];
     }
 }
 exports.findByKey = findByKey;
 function removeByVal(arr, id) {
-    for (var i = arr.length - 1; i >= 0; i--) {
+    for (let i = arr.length - 1; i >= 0; i--) {
         if (arr[i] === id) {
             arr.splice(i, 1);
         }
@@ -36,9 +36,9 @@ function toMap(arr, key) {
     if (!key) {
         return;
     }
-    var map = {};
-    for (var i = 0; i < arr.length; i++) {
-        var src = arr[i];
+    let map = {};
+    for (let i = 0; i < arr.length; i++) {
+        let src = arr[i];
         map[src[key]] = arr[i];
     }
     return map;
@@ -54,11 +54,11 @@ function arrayToObj(arr, keyPicker) {
         console.error('arrayToObj.notArray', arr);
         return {};
     }
-    var obj = {};
-    for (var i = 0; i < arr.length; ++i) {
-        var v = void 0;
-        var a = arr[i];
-        var k = void 0;
+    let obj = {};
+    for (let i = 0; i < arr.length; ++i) {
+        let v;
+        let a = arr[i];
+        let k;
         if (typeof a === 'number' || typeof a === 'string') {
             k = a;
             v = true;
@@ -76,15 +76,15 @@ function arrayToObj(arr, keyPicker) {
             v = a;
         }
         if (k === undefined || k === null) {
-            console.error("arrayToObj.undefinedKey-- i: " + i + ", k: " + k);
+            console.error(`arrayToObj.undefinedKey-- i: ${i}, k: ${k}`);
             continue;
         }
         if (typeof (k) !== 'number' && typeof (k) !== 'string') {
-            console.error("arrayToObj.invalidKey-- i: " + i + ", type: " + typeof (k) + ", k: " + k);
+            console.error(`arrayToObj.invalidKey-- i: ${i}, type: ${typeof (k)}, k: ${k}`);
             continue;
         }
         if (obj.hasOwnProperty(k)) {
-            console.error("arrayToObj.duplicateKeys-- k: " + k + ", i: " + i + ", a: " + a);
+            console.error(`arrayToObj.duplicateKeys-- k: ${k}, i: ${i}, a: ${a}`);
             continue;
         }
         obj[k] = v;
@@ -93,24 +93,24 @@ function arrayToObj(arr, keyPicker) {
 }
 exports.arrayToObj = arrayToObj;
 function arrayFill(length, value) {
-    var res = new Array(length);
-    for (var i = res.length - 1; i >= 0; i--) {
+    let res = new Array(length);
+    for (let i = res.length - 1; i >= 0; i--) {
         res[i] = value;
     }
     return res;
 }
 exports.arrayFill = arrayFill;
 function arrayRepeat(array, times) {
-    var res = [];
-    for (var i = 0; i < times; ++i) {
+    let res = [];
+    for (let i = 0; i < times; ++i) {
         res = res.concat(array);
     }
     return res;
 }
 exports.arrayRepeat = arrayRepeat;
 function arrayRange(startOrLength, end, step) {
-    var start;
-    var dir = 1;
+    let start;
+    let dir = 1;
     if (end === undefined) {
         start = 0;
         end = startOrLength;
@@ -124,17 +124,17 @@ function arrayRange(startOrLength, end, step) {
     if (step < 0) {
         dir = -1;
     }
-    var res = [];
-    for (var i = 0, cur = start; dir * cur < dir * end; i++, cur += step) {
+    let res = [];
+    for (let i = 0, cur = start; dir * cur < dir * end; i++, cur += step) {
         res[i] = cur;
     }
     return res;
 }
 exports.arrayRange = arrayRange;
 function arraySum(arr, keyOpt) {
-    var s = 0;
-    for (var i = arr.length - 1; i >= 0; i--) {
-        var v = void 0;
+    let s = 0;
+    for (let i = arr.length - 1; i >= 0; i--) {
+        let v;
         if (arr[i] && typeof (arr[i]) === 'object' && keyOpt) {
             v = arr[i][keyOpt];
         }
@@ -147,9 +147,8 @@ function arraySum(arr, keyOpt) {
 }
 exports.arraySum = arraySum;
 function arrayMinMaxHelper(arr, isMax) {
-    var s = undefined;
-    for (var _i = 0, arr_1 = arr; _i < arr_1.length; _i++) {
-        var v = arr_1[_i];
+    let s = undefined;
+    for (let v of arr) {
         if (isNaN(v)) {
             continue;
         }
@@ -160,10 +159,9 @@ function arrayMinMaxHelper(arr, isMax) {
     return s;
 }
 function arrayMinMaxObjHelper(arr, key, isMax) {
-    var s = undefined;
-    for (var _i = 0, arr_2 = arr; _i < arr_2.length; _i++) {
-        var o = arr_2[_i];
-        var v = o[key];
+    let s = undefined;
+    for (let o of arr) {
+        let v = o[key];
         if (isNaN(v)) {
             continue;
         }
@@ -190,9 +188,9 @@ function arrayMinObj(arr, key) {
 }
 exports.arrayMinObj = arrayMinObj;
 function arrayPull(arrOfObjs, key) {
-    var res = [];
-    for (var i = 0; i < arrOfObjs.length; i++) {
-        var obj = arrOfObjs[i];
+    let res = [];
+    for (let i = 0; i < arrOfObjs.length; i++) {
+        let obj = arrOfObjs[i];
         // typeof null is 'object'!
         if (typeof (obj) !== 'object' || obj === null) {
             res.push(undefined);
@@ -205,18 +203,18 @@ function arrayPull(arrOfObjs, key) {
 }
 exports.arrayPull = arrayPull;
 function stringArrayMergeUnique(a, b) {
-    var uniq = {};
-    for (var i = 0; i < a.length; ++i) {
+    const uniq = {};
+    for (let i = 0; i < a.length; ++i) {
         uniq[a[i]] = 1;
     }
-    for (var i = 0; i < b.length; ++i) {
+    for (let i = 0; i < b.length; ++i) {
         uniq[b[i]] = 1;
     }
     return Object.keys(uniq);
 }
 exports.stringArrayMergeUnique = stringArrayMergeUnique;
 function cmpString(desc, a, b) {
-    var val = 0;
+    let val = 0;
     if (a > b) {
         val = 1;
     }
@@ -247,12 +245,11 @@ function cmpNum(desc, a, b) {
     return (desc ? (b - a) : (a - b));
 }
 exports.cmpNum = cmpNum;
-function forceArray(thing, shallowCln) {
-    if (shallowCln === void 0) { shallowCln = false; }
+function forceArray(thing, shallowCln = false) {
     if (Array.isArray(thing)) {
         if (shallowCln) {
-            var ret = [];
-            for (var i = 0; i < thing.length; ++i) {
+            let ret = [];
+            for (let i = 0; i < thing.length; ++i) {
                 ret.push(thing[i]);
             }
             return ret;
@@ -269,13 +266,13 @@ function forceArray(thing, shallowCln) {
 exports.forceArray = forceArray;
 // Len is optional for arrays, required for array-like-objects.
 function bsearch(arr, cmp, len) {
-    var mn = 0;
-    var mx = len || arr.length;
-    var i;
-    var res = -1;
+    let mn = 0;
+    let mx = len || arr.length;
+    let i;
+    let res = -1;
     while (mn < mx) {
         i = (mx + mn) / 2 | 0;
-        var op = cmp(arr[i]);
+        let op = cmp(arr[i]);
         if (op < 0) {
             mx = i;
         }
