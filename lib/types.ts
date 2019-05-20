@@ -2,8 +2,7 @@
 * Copyright 2017-present Ampersand Technologies, Inc. *
 */
 
-export type StashOf<T> = {[k: string]: T};
-export type Stash = StashOf<any>;
+export type Stash<T = any> = {[k: string]: T};
 
 export interface ErrorObject {
   name?: string;

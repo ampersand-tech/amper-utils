@@ -3,7 +3,7 @@
 * @allowConsoleFuncs
 */
 
-import { Stash, StashOf } from './types';
+import { Stash } from './types';
 
 declare var Blob: any;
 
@@ -539,7 +539,7 @@ export function objectValues(obj) {
   return a;
 }
 
-export function objectMap<T, U>(obj: StashOf<T>, cb: (any: T, string: string) => U): StashOf<U> {
+export function objectMap<T, U>(obj: Stash<T>, cb: (any: T, string: string) => U): Stash<U> {
   let res = {};
   for (let key in obj) {
     if (!obj.hasOwnProperty(key)) {
@@ -550,7 +550,7 @@ export function objectMap<T, U>(obj: StashOf<T>, cb: (any: T, string: string) =>
   return res;
 }
 
-export function objectFilter<T>(obj: StashOf<T>, filter?: (el: T, key: string) => boolean): StashOf<T>|undefined {
+export function objectFilter<T>(obj: Stash<T>, filter?: (el: T, key: string) => boolean): Stash<T>|undefined {
   if (!obj) {
     return;
   }
@@ -728,7 +728,7 @@ export function objCmpMasked(src, dst, ignoreMask): boolean {
 }
 
 export type SortFn<T> = (a: T, b: T) => number;
-export function objToArray<T>(obj: StashOf<T>|undefined, sortOpt?: SortFn<T>) {
+export function objToArray<T>(obj: Stash<T>|undefined, sortOpt?: SortFn<T>) {
   const res = [] as any[];
   if (obj) {
     for (let k in obj) {
