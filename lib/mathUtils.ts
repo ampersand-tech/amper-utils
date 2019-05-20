@@ -2,9 +2,9 @@
 * Copyright 2017-present Ampersand Technologies, Inc.
 */
 
-import { StashOf } from './types';
+import { Stash } from './types';
 
-const easingFunctions: StashOf<(number) => number> = {
+const easingFunctions: Stash<(number) => number> = {
   linear:         function(t) { return t; },
   easeInQuad:     function(t) { return t * t; },
   easeOutQuad:    function(t) { return t * (2 - t); },

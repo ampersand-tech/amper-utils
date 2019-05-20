@@ -1,10 +1,9 @@
 /**
 * Copyright 2017-present Ampersand Technologies, Inc. *
 */
-export declare type StashOf<T> = {
+export declare type Stash<T = any> = {
     [k: string]: T;
 };
-export declare type Stash = StashOf<any>;
 export interface ErrorObject {
     name?: string;
     message?: string;

@@ -2,7 +2,7 @@
 * Copyright 2018-present Ampersand Technologies, Inc.
 * @allowConsoleFuncs
 */
-import { Stash, StashOf } from './types';
+import { Stash } from './types';
 export declare function isObject(value: any): value is Stash;
 export declare function fieldCount(obj: any): number;
 export declare function shallowClone<T>(src: T): T;
@@ -43,8 +43,8 @@ export declare function objIntersectionKeys(lhs: any, rhs: any): any;
 export declare function objFindRHSOnlyKeys(lhs: any, rhs: any): string[];
 export declare function objDiffKeys(lhs: any, rhs: any): string[];
 export declare function objectValues(obj: any): any[];
-export declare function objectMap<T, U>(obj: StashOf<T>, cb: (any: T, string: string) => U): StashOf<U>;
-export declare function objectFilter<T>(obj: StashOf<T>, filter?: (el: T, key: string) => boolean): StashOf<T> | undefined;
+export declare function objectMap<T, U>(obj: Stash<T>, cb: (any: T, string: string) => U): Stash<U>;
+export declare function objectFilter<T>(obj: Stash<T>, filter?: (el: T, key: string) => boolean): Stash<T> | undefined;
 /**
  * only checks keys directly on the object.
  */
@@ -60,5 +60,5 @@ export declare function objDiffRecur(path: any, diffs: any, ignoreMask: any, src
 export declare function objDiff(src: any, dst: any, ignoreMask?: any): any;
 export declare function objCmpMasked(src: any, dst: any, ignoreMask: any): boolean;
 export declare type SortFn<T> = (a: T, b: T) => number;
-export declare function objToArray<T>(obj: StashOf<T> | undefined, sortOpt?: SortFn<T>): any[];
+export declare function objToArray<T>(obj: Stash<T> | undefined, sortOpt?: SortFn<T>): any[];
 export declare function objCmpFast(src?: any, dst?: any): boolean;
