@@ -3,6 +3,7 @@
 * Copyright 2018-present Ampersand Technologies, Inc.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.isNotFound = exports.errorToCode = exports.errorToString = void 0;
 function errorToString(err, allowStack) {
     if (typeof err === 'string') {
         return err;

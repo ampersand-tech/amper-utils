@@ -1,7 +1,7 @@
 /**
 * Copyright 2017-present Ampersand Technologies, Inc.
 */
-export declare type EasingFunction = 'linear' | 'easeInQuad' | 'easeOutQuad' | 'easeInOutQuad' | 'easeInCubic' | 'easeOutCubic' | 'easeInOutCubic' | 'easeInQuart' | 'easeOutQuart' | 'easeInOutQuart' | 'easeInQuint' | 'easeOutQuint' | 'easeInOutQuint' | 'easeOutElastic';
+export type EasingFunction = 'linear' | 'easeInQuad' | 'easeOutQuad' | 'easeInOutQuad' | 'easeInCubic' | 'easeOutCubic' | 'easeInOutCubic' | 'easeInQuart' | 'easeOutQuart' | 'easeInOutQuart' | 'easeInQuint' | 'easeOutQuint' | 'easeInOutQuint' | 'easeOutElastic';
 export declare function clamp(min: number, max: number, x: number): number;
 export declare function sign(x: number): number;
 export declare function interp(a: number, b: number, p: number): number;
@@ -14,10 +14,10 @@ export interface Point {
 }
 declare enum _ScreenSpacePoint {
 }
-export declare type ScreenSpacePoint = Point & _ScreenSpacePoint;
+export type ScreenSpacePoint = Point & _ScreenSpacePoint;
 declare enum _Vector {
 }
-export declare type Vector = Point & _Vector;
+export type Vector = Point & _Vector;
 export interface Dimensions {
     width: number;
     height: number;

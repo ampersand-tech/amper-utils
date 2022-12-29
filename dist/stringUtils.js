@@ -5,6 +5,7 @@
 * @allowConsoleFuncs
 */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.safeDecodeURIComponent = exports.safeEncodeURIComponent = exports.checkForNonPrintableUnicode = exports.deMultiByte = exports.pluralize = exports.formatNameList = exports.titlify = exports.nameOwnership = exports.fileExt = exports.fileName = exports.endsWith = exports.startsWith = exports.findWordEnd = exports.findWordStart = exports.toFixedLength = exports.stringRepeat = void 0;
 function stringRepeat(s, n) {
     let res = '';
     for (let i = 0; i < n; ++i) {

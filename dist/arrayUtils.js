@@ -4,6 +4,7 @@
 * @allowConsoleFuncs
 */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.bsearch = exports.forceArray = exports.cmpNum = exports.cmpStringOrUndefined = exports.cmpString = exports.stringArrayMergeUnique = exports.arrayPull = exports.arrayMinObj = exports.arrayMin = exports.arrayMaxObj = exports.arrayMax = exports.arraySum = exports.arrayRange = exports.arrayRepeat = exports.arrayFill = exports.arrayToObj = exports.toMap = exports.removeByVal = exports.findByKey = exports.findIdxByKey = void 0;
 function findIdxByKey(arr, key, id) {
     if (!arr) {
         return -1;

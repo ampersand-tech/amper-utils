@@ -4,6 +4,7 @@
 * @allowConsoleFuncs
 */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.objCmpFast = exports.objToArray = exports.objCmpMasked = exports.objDiff = exports.objDiffRecur = exports.objClear = exports.objIncrementKey = exports.objectFillPath = exports.objectGetFromPath = exports.safeObjIsEmpty = exports.objSwapValues = exports.objectSortKeys = exports.objectKeysEqual = exports.objectFilter = exports.objectMap = exports.objectValues = exports.objDiffKeys = exports.objFindRHSOnlyKeys = exports.objIntersectionKeys = exports.objectSum = exports.objectTrim = exports.cloneAndStrip = exports.copySomeFields = exports.copyFieldsIfUnset = exports.copyFieldsErrIfSet = exports.copyFields = exports.cloneSomeFieldsImmutable = exports.deepCompare = exports.isImmutable = exports.objectMakeImmutable = exports.cloneImmutable = exports.cloneWithCycle = exports.cloneExcludingFields = exports.clone = exports.cloneRecur = exports.cloneTruncate = exports.shallowCloneAndCopy = exports.shallowCloneExcludeFields = exports.shallowClone = exports.fieldCount = exports.isObject = void 0;
 function isObject(value) {
     return typeof (value) === 'object' && value !== null && !Array.isArray(value);
 }
