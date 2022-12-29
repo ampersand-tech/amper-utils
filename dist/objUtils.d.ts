@@ -16,7 +16,7 @@ export declare function shallowCloneAndCopy<T, U>(src: T, replace: U): T & U;
 export declare function cloneTruncate(srcObj: any, maxBytes: any): any;
 export declare function cloneRecur(obj: any, depth: any): any;
 export declare function clone<T>(srcObj: T): T;
-export declare type ObjMask<T> = '*' | 1 | {
+export type ObjMask<T> = '*' | 1 | {
     [P in keyof T]?: ObjMask<T[P]>;
 };
 export declare function cloneExcludingFields<T>(srcObj: T, excludeFields?: ObjMask<T>): Partial<T>;
@@ -59,6 +59,6 @@ export declare function objClear(obj: any): any;
 export declare function objDiffRecur(path: any, diffs: any, ignoreMask: any, src: any, dst: any): any;
 export declare function objDiff(src: any, dst: any, ignoreMask?: any): any;
 export declare function objCmpMasked(src: any, dst: any, ignoreMask: any): boolean;
-export declare type SortFn<T> = (a: T, b: T) => number;
+export type SortFn<T> = (a: T, b: T) => number;
 export declare function objToArray<T>(obj: Stash<T> | undefined, sortOpt?: SortFn<T>): any[];
 export declare function objCmpFast(src?: any, dst?: any): boolean;

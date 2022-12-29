@@ -16,7 +16,7 @@ export declare function arrayFill(length: any, value: any): any[];
 export declare function arrayRepeat(array: any, times: any): never[];
 export declare function arrayRange(startOrLength: number, end?: number, step?: number): number[];
 export declare function arraySum<T, K extends keyof T>(arr: (number | T)[], keyOpt?: K): number;
-declare type KeyedNumberObj = {
+type KeyedNumberObj = {
     [k: string]: number;
 };
 export declare function arrayMax(arr: number[]): number | undefined;

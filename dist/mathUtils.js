@@ -3,6 +3,7 @@
 * Copyright 2017-present Ampersand Technologies, Inc.
 */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.calcInterpParam = exports.mod = exports.rectsMatch = exports.rad2Deg = exports.deg2Rad = exports.vectorMulScalar = exports.vectorSub = exports.vectorAdd = exports.clone = exports.normalize = exports.dist = exports.distSqrd = exports.length = exports.lengthSqrd = exports.randomFloatRange = exports.interpEaseClamped = exports.parameterize = exports.interp = exports.sign = exports.clamp = void 0;
 const easingFunctions = {
     linear: function (t) { return t; },
     easeInQuad: function (t) { return t * t; },

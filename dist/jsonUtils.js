@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.jsonClone = exports.prettyStringify = exports.safeStringify = exports.safeParse = void 0;
 /**
 * Copyright 2018-present Ampersand Technologies, Inc.
 */
@@ -30,7 +31,7 @@ function safeStringify(val, maxBytes, pretty) {
     }
     catch (e1) {
         try {
-            str = JSON.stringify(objUtils_1.cloneWithCycle(val, true), undefined, pretty ? 2 : undefined); // @allowJsonFuncs
+            str = JSON.stringify((0, objUtils_1.cloneWithCycle)(val, true), undefined, pretty ? 2 : undefined); // @allowJsonFuncs
         }
         catch (e2) {
             str = '<error>';

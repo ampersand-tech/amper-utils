@@ -52,8 +52,8 @@ export function streamToFile(
   readStream: stream.Stream,
   filePath: string,
   compress?: boolean,
-): Promise<any> {
-  return new Promise((resolve, reject) => {
+): Promise<void> {
+  return new Promise<void>((resolve, reject) => {
     if (compress) {
       readStream = readStream.pipe(zlib.createGzip());
       filePath += '.gz';
