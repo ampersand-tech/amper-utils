@@ -1,6 +1,6 @@
 {
   "name": "amper-utils",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Useful utils for Ampersand",
   "main": "dist/types.js",
   "types": "dist/types.d.ts",
