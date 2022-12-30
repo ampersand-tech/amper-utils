@@ -36,7 +36,8 @@ function idToNumber(str) {
     return val;
 }
 exports.idToNumber = idToNumber;
-let gUUIDCounter = null, gWindowNumber = 0;
+let gUUIDCounter = null;
+let gWindowNumber = 0;
 function createUUID(accountID, sessionIdx, optType) {
     if (gUUIDCounter === null) {
         gUUIDCounter = randInt();
@@ -48,8 +49,8 @@ function createUUID(accountID, sessionIdx, optType) {
     if (!sessionIdx) {
         throw new Error('createUUID invalid sessionID ' + sessionIdx);
     }
-    let sessionID = numberToID(sessionIdx) + '+' + numberToID(gWindowNumber || 1);
-    let count = ++gUUIDCounter;
+    const sessionID = numberToID(sessionIdx) + '+' + numberToID(gWindowNumber || 1);
+    const count = ++gUUIDCounter;
     return {
         uuid: accountID + '_' + sessionID + '_' + count + (optType ? '-' + optType : ''),
         count: count,
@@ -62,17 +63,17 @@ function canMakeUUID(accountID, sessionIdx) {
 exports.canMakeUUID = canMakeUUID;
 function parseUUID(uuid) {
     // see dbUtil.uuid()
-    let m = (/(.*?)_(.*?)_([0-9]+)(?:-(.*))?/).exec(uuid);
+    const m = (/(.*?)_(.*?)_([0-9]+)(?:-(.*))?/).exec(uuid);
     if (!m) {
         return;
     }
-    let sessionParts = m[2].split('+');
-    let sessionID = idToNumber(sessionParts[0]);
+    const sessionParts = m[2].split('+');
+    const sessionID = idToNumber(sessionParts[0]);
     if (!sessionID) {
         return;
     }
-    let windowNumber = sessionParts[1] ? idToNumber(sessionParts[1]) : 0;
-    let count = parseInt(m[3], 10) | 0;
+    const windowNumber = sessionParts[1] ? idToNumber(sessionParts[1]) : undefined;
+    const count = parseInt(m[3], 10) | 0;
     if (count) {
         return {
             accountID: m[1],
@@ -84,7 +85,8 @@ function parseUUID(uuid) {
     }
 }
 exports.parseUUID = parseUUID;
-let gPrevTime = 0, gCount = 0;
+let gPrevTime = 0;
+let gCount = 0;
 let gSessionIdx = 0;
 function timeKeyFromDate(t) {
     if (t === gPrevTime) {

@@ -15,7 +15,7 @@ export declare function canMakeUUID(accountID: string, sessionIdx: number): bool
 export declare function parseUUID(uuid: string): {
     accountID: string;
     sessionID: number;
-    windowNumber: number;
+    windowNumber: number | undefined;
     count: number;
     optType: string;
 } | undefined;
