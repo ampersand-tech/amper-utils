@@ -6,6 +6,7 @@ import { Stash } from '../lib/types';
 import * as UuidUtils from '../lib/uuidUtils';
 
 import { expect } from 'chai';
+import { describe, it } from 'mocha';
 
 describe('numberToID', function() {
   it('should work', function() {

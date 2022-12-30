@@ -5,6 +5,7 @@
 import * as StringUtils from '../lib//stringUtils';
 
 import { expect } from 'chai';
+import { describe, it } from 'mocha';
 
 describe('stringUtils', function() {
   describe('titlify', function() {
